@@ -1,6 +1,7 @@
 package in.bitcode.notificationdemo;
 
 import android.app.RemoteInput;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -23,17 +24,35 @@ public class ActDetails extends AppCompatActivity {
         }*/
 
 
-        Bundle bundle = RemoteInput.getResultsFromIntent( getIntent() );
+        Bundle bundle = RemoteInput.getResultsFromIntent(getIntent());
         String message = bundle.getString("key_text");
-        Toast.makeText( this , message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder( this, "bitcode");
-        builder.setContentTitle("Message " + message + "\n has been sent!" );
+                new NotificationCompat.Builder(this, "bitcode");
+        builder.setContentTitle("Message " + message + "\n has been sent!");
         builder.setContentText("confirmation");
-        builder.setSmallIcon( R.mipmap.ic_launcher );
+        builder.setSmallIcon(R.mipmap.ic_launcher);
 
-        NotificationManagerCompat.from( this )
-                .notify( 1, builder.build() );
+        NotificationManagerCompat.from(this)
+                .notify(1, builder.build());
+
+        new AsyncTask<Object, Object, Object>() {
+            @Override
+            protected Object doInBackground(Object... objects) {
+                try {
+                    Thread.sleep(10 * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Object o) {
+                super.onPostExecute(o);
+                NotificationManagerCompat.from(ActDetails.this).cancel(1);
+            }
+        }.execute((Object) null);
     }
 }

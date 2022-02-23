@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //add action button
                 Intent actionIntent = new Intent( Intent.ACTION_VIEW );
-                actionIntent.setData(Uri.parse("http://bitcode.in") );
+                actionIntent.setData(Uri.parse("https://bitcode.in") );
 
 
                 builder.addAction(
@@ -333,6 +333,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //reply
 
+                //build remote input with a key for data
                 String key = "key_text";
                 RemoteInput.Builder builderRInput = new RemoteInput.Builder(key);
                 RemoteInput remoteInput = builderRInput.setLabel("Say something here...").build();
