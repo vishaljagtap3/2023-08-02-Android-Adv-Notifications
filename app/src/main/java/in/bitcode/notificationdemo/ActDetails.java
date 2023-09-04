@@ -1,5 +1,6 @@
 package in.bitcode.notificationdemo;
 
+import android.annotation.SuppressLint;
 import android.app.RemoteInput;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 public class ActDetails extends AppCompatActivity {
 
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,10 @@ public class ActDetails extends AppCompatActivity {
         }*/
 
 
-        Bundle bundle = RemoteInput.getResultsFromIntent(getIntent());
+        Bundle bundle = null;
+
+        bundle = RemoteInput.getResultsFromIntent(getIntent());
+
         String message = bundle.getString("key_text");
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
@@ -34,7 +39,8 @@ public class ActDetails extends AppCompatActivity {
         builder.setContentText("confirmation");
         builder.setSmallIcon(R.mipmap.ic_launcher);
 
-        NotificationManagerCompat.from(this)
+        NotificationManagerCompat
+                .from(this)
                 .notify(1, builder.build());
 
         new AsyncTask<Object, Object, Object>() {
@@ -48,6 +54,7 @@ public class ActDetails extends AppCompatActivity {
                 return null;
             }
 
+            @SuppressLint("StaticFieldLeak")
             @Override
             protected void onPostExecute(Object o) {
                 super.onPostExecute(o);

@@ -107,7 +107,10 @@ public class MainActivity extends AppCompatActivity {
                 builder.setColor(Color.RED);
                 builder.setSmallIcon(R.mipmap.ic_launcher);
 
-                Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.in_flag);
+                Bitmap largeIcon =
+                        BitmapFactory.decodeResource(
+                                getResources(), R.drawable.in_flag
+                        );
                 builder.setLargeIcon(largeIcon);
 
                 PendingIntent contentIntent =
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 //big text style
                 NotificationCompat.BigTextStyle bigTextStyle =
                         new NotificationCompat.BigTextStyle();
-                bigTextStyle.bigText("This is big text! This is big text! This is big text!");
+                bigTextStyle.bigText("This is big text! This is big text! This is big text! This is big text! This is big text! This is big text! This is big text! This is big text! This is big text!");
                 bigTextStyle.setBigContentTitle("Big Content Title");
                 bigTextStyle.setSummaryText("this is summary text");
 
@@ -224,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                         .addLine("BitCode as CEO")
                         .addLine("Infosys as Mentor");
                 inboxStyle.setSummaryText("Are you serious?");
+
                 builder.setStyle(inboxStyle);
 
                 Notification notification = builder.build();
@@ -275,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.addAction(
                         R.mipmap.ic_launcher,
-                        "Some Action",
+                        "View",
                         PendingIntent.getActivity(
                                 MainActivity.this,
                                 0,
@@ -286,8 +290,12 @@ public class MainActivity extends AppCompatActivity {
 
                 builder.addAction(
                         R.mipmap.ic_launcher,
-                        "Action",
-                        PendingIntent.getActivity( MainActivity.this, 0, actionIntent, 0 )
+                        "Call",
+                        PendingIntent.getActivity(
+                                MainActivity.this,
+                                0,
+                                new Intent(Intent.ACTION_DIAL),
+                                0 )
                 );
 
                 Notification notification = builder.build();
@@ -314,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setAutoCancel(true);
                 builder.setContentTitle("BitCode has got something for you!");
                 builder.setContentText("You have been selected by Google as CEO! We are kidding!");
-                builder.setColor(Color.RED);
+                builder.setColor(Color.BLACK);
                 builder.setSmallIcon(R.mipmap.ic_launcher);
 
                 Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.in_flag);
@@ -336,7 +344,8 @@ public class MainActivity extends AppCompatActivity {
                 //build remote input with a key for data
                 String key = "key_text";
                 RemoteInput.Builder builderRInput = new RemoteInput.Builder(key);
-                RemoteInput remoteInput = builderRInput.setLabel("Say something here...").build();
+                RemoteInput remoteInput = builderRInput.setLabel("Say something here...")
+                        .build();
 
 
                 PendingIntent replyPendingIntent =
@@ -358,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
                 NotificationCompat.Action action =
                         new NotificationCompat.Action.Builder(
                                 R.mipmap.ic_launcher,
-                                "reply",
+                                "Reply",
                                 replyPendingIntent
                         ).addRemoteInput(remoteInput)
                                 .build();
